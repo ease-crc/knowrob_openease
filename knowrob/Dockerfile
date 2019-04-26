@@ -1,4 +1,4 @@
-FROM openease/kinetic-swi
+FROM openease/ros-prolog
 MAINTAINER Daniel Beßler, danielb@cs.uni-bremen.de
 
 # Initialize the catkin workspace
