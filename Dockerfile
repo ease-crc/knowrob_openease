@@ -1,11 +1,12 @@
 FROM ubuntu:16.04
-MAINTAINER Daniel Beßler, danielb@cs.uni-bremen.de	
+MAINTAINER Daniel Beßler, danielb@uni-bremen.de
 
 ARG HOST_IP=172.17.0.1
 ARG ROS_SOURCES="http://packages.ros.org/ros/ubuntu"
 
 ARG USE_APT_CACHE=0
 ARG USE_NEXUS=0
+ARG LOCAL_BUILD=0
 
 # Use apt-cacher container
 RUN if [ "x$USE_APT_CACHE" = "x0" ] ; then \
@@ -27,7 +28,7 @@ RUN sh -c 'wget https://raw.githubusercontent.com/ros/rosdistro/master/ros.key &
                            ros-kinetic-rosjava ros-kinetic-rosbridge-suite \
                            mongodb-clients \
                            ros-kinetic-rosauth mencoder lame libavcodec-extra \
-                           openjdk-8-jdk texlive-latex-base imagemagick  && \
+                           openjdk-8-jdk texlive-latex-base imagemagick python-rdflib  && \
     apt-get -qq -y autoremove  && \
     apt-get -qq -y clean  && \
     rm -rf /var/lib/apt/lists/*  && \
@@ -83,3 +84,30 @@ RUN if [ "x$USE_NEXUS" = "x0" ] ; then \
 
 # Forward ports: webserver + rosbridge
 EXPOSE 1111 9090
+
+# Initialize the catkin workspace
+USER ros
+WORKDIR /home/ros/src
+RUN /usr/bin/python /opt/ros/kinetic/bin/catkin_init_workspace
+
+ADD ./src.tar /home/ros/src/
+
+RUN if [ "x$LOCAL_BUILD" = "x0" ] ; then \
+    rm -rf /home/ros/src/* && \
+    git clone --recursive https://github.com/daniel86/knowrob.git -b dul && \
+    git clone --recursive https://github.com/daniel86/knowrob_addons.git -b dul && \
+    git clone https://github.com/knowrob/rosowl.git && \
+    git clone https://github.com/knowrob/genowl.git && \
+    git clone https://github.com/ease-crc/ease_ontology.git && \
+    git clone https://github.com/code-iai/iai_maps.git && \
+    git clone https://github.com/code-iai/iai_common_msgs.git && \
+    git clone https://github.com/code-iai/iai_cad_tools.git && \
+    git clone https://github.com/RobotWebTools/mjpeg_server.git && \
+    git clone https://github.com/RobotWebTools/tf2_web_republisher.git ; \
+    fi
+
+WORKDIR /home/ros
+# Build the catkin workspace
+RUN /opt/ros/kinetic/bin/catkin_make
+
+# ENTRYPOINT /opt/ros/kinetic/bin/roslaunch knowrob_roslog_launch knowrob_ease.launch
