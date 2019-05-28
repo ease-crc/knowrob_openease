@@ -20,8 +20,8 @@ if [ $LOCAL_BUILD -eq 1 ]; then
       cd $WS1
       rm -rf $DIR/src.tar
       tar --exclude=.svn --exclude=.git --exclude=build --exclude=bin --exclude=.gradle -cf ./src.tar ./*
-      mv ./src.tar $DIR/
-      cd $DIR
+      mv ./src.tar "$DIR/"
+      cd "$DIR"
     fi
   else
     echo "ERROR: ROS_PACKAGE_PATH is not defined. Please source your ROS workspace for local builds."
@@ -30,7 +30,7 @@ if [ $LOCAL_BUILD -eq 1 ]; then
 else
   # create empty file because conditional ADD is not possible in Dockerfile.
   # seems docker does not care that it is an empty file.
-  touch $DIR/src.tar
+  touch "$DIR/src.tar"
 fi
 
 # $DIR/../../scripts/start-apt-cacher

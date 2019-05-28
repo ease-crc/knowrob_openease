@@ -94,8 +94,8 @@ ADD ./src.tar /home/ros/src/
 
 RUN if [ "x$LOCAL_BUILD" = "x0" ] ; then \
     rm -rf /home/ros/src/* && \
-    git clone --recursive https://github.com/daniel86/knowrob.git -b dul && \
-    git clone --recursive https://github.com/daniel86/knowrob_addons.git -b dul && \
+    git clone --recursive https://github.com/daniel86/knowrob.git -b kinetic && \
+    git clone --recursive https://github.com/daniel86/knowrob_addons.git -b kinetic && \
     git clone https://github.com/knowrob/rosowl.git && \
     git clone https://github.com/knowrob/genowl.git && \
     git clone https://github.com/ease-crc/ease_ontology.git && \
