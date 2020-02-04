@@ -35,8 +35,8 @@ fi
 
 # $DIR/../../scripts/start-apt-cacher
 # $DIR/../../scripts/start-nexus
-echo "Building openease/kinetic-knowrob-daemon....";
+echo "Building openease/knowrob....";
 docker build \
     --build-arg HOST_IP=${HOST_IP} \
     --build-arg LOCAL_BUILD=${LOCAL_BUILD} \
-    -t openease/kinetic-knowrob-daemon $DIR
+    -t openease/knowrob $DIR
