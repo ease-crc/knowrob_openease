@@ -80,10 +80,10 @@ RUN /usr/bin/python /opt/ros/melodic/bin/catkin_init_workspace
 
 ADD ./src.tar /home/ros/src/
 
-RUN if [ "y$LOCAL_BUILD" = "y0" ] ; then \
+RUN if [ "x$LOCAL_BUILD" = "x0" ] ; then \
     rm -rf /home/ros/src/* && \
-    git clone https://github.com/knowrob/knowrob.git && \
-    git clone https://github.com/knowrob/rosprolog.git && \
+    git clone https://github.com/daniel86/knowrob.git && \
+    git clone https://github.com/daniel86/rosprolog.git && \
     git clone https://github.com/knowrob/rosowl.git && \
     git clone https://github.com/knowrob/genowl.git && \
     git clone https://github.com/ease-crc/ease_ontology.git && \
