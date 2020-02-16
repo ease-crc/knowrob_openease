@@ -8,5 +8,11 @@
     <arg name="authenticate" value="true"/>
   </include>
   
-  <include file="$(find rosprolog)/launch/rosprolog.launch" />
+  <node name="tf2_web_republisher" pkg="tf2_web_republisher" type="tf2_web_republisher"/>
+  
+  <include file="$(find rosprolog)/launch/rosprolog.launch">
+    <arg name="initial_package" value="knowrob_memory"/>
+  </include>
+  
+  <include file="$(find knowrob_objects)/launch/object_state_publisher.launch" />
 </launch>
