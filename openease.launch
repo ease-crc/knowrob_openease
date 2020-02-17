@@ -12,6 +12,7 @@
   
   <include file="$(find rosprolog)/launch/rosprolog.launch">
     <arg name="initial_package" value="knowrob_memory"/>
+    <arg name="initial_goal" value="register_ros_package(knowrob_vis)"/>
   </include>
   
   <include file="$(find knowrob_objects)/launch/object_state_publisher.launch" />
