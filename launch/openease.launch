@@ -1,0 +1,14 @@
+<launch>
+  <arg name="num_pl_threads" default="2" />
+  <arg name="num_ros_threads" default="4" />
+  <arg name="knowrob_settings" default="$(find knowrob)/settings/neemhub.pl" />
+  <env name="KNOWROB_SETTINGS" value="$(arg knowrob_settings)" />
+  
+  <param name="num_pl_threads" type="int" value="$(arg num_pl_threads)" />
+  <param name="num_ros_threads" type="int" value="$(arg num_ros_threads)" />
+
+  <include file="$(find rosprolog)/launch/rosprolog.launch">
+    <arg name="initial_package" type="string" value="knowrob_openease" />
+    <arg name="initial_goal" type="string" value="true" />
+  </include>
+</launch>
