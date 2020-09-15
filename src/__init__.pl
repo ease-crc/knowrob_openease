@@ -2,5 +2,8 @@
 :- register_ros_package(knowrob_openease).
 :- register_ros_package(knowrob).
 
-% load modules
+% load query tunnling
 :- use_module('./query_handler.pl').
+
+% load marker visualization
+:- use_directory('marker_vis').
