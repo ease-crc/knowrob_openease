@@ -4,9 +4,7 @@
     ]).
 
 show(_) :-
-	tripledb_load('package://knowrob/owl/robots/PR2.owl'), 
-	urdf_load('http://knowrob.org/kb/PR2.owl#PR2_0', 'package://knowrob/urdf/pr2_for_unit_tests.urdf', [load_rdf]), 
-	urdf_set_pose_to_origin('http://knowrob.org/kb/PR2.owl#PR2_0',map), 
+	urdf_load('http://knowrob.org/kb/PR2.owl#PR2_0', 'package://knowrob/urdf/pr2_for_unit_tests.urdf', []), 
 	sleep(1.0), 
 	marker_plugin:republish.
 
