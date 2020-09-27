@@ -3,10 +3,16 @@
       hide(r)
     ]).
 
+use_module(library('ros/urdf')).
+
 show(_) :-
-	tripledb_load('package://knowrob/owl/robots/PR2.owl'), 
-	urdf_load('http://knowrob.org/kb/PR2.owl#PR2_0', 'package://knowrob/urdf/pr2_for_unit_tests.urdf', [load_rdf]), 
-	urdf_set_pose_to_origin('http://knowrob.org/kb/PR2.owl#PR2_0',map), 
+	tripledb_load('package://knowrob/owl/robots/PR2.owl'),
+	(	url_resolve('package://knowrob/urdf/pr2_for_unit_tests.urdf',Resolved)
+	->	true
+	;	Resolved='package://knowrob/urdf/pr2_for_unit_tests.urdf' 
+	),
+	urdf_load_file('http://knowrob.org/kb/PR2.owl#PR2_0', Resolved), 
+	urdf_set_pose_to_origin('http://knowrob.org/kb/PR2.owl#PR2_0',map),
 	sleep(1.0), 
 	marker_plugin:republish.
 
