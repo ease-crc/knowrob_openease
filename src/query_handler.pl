@@ -36,5 +36,5 @@ gen_msgs(is_event(_)) :-
     create_marker(NextEvent).
 
 create_marker(Event) :-
-    interval(Event,[T1,_]),
+    time_interval_data(Event,T1,_),
     show_markers(T1).
