@@ -25,16 +25,16 @@ openease_query(Query, Mode) :-
     gen_msgs(Query).
 
 gen_msgs(is_event(_)) :-
- 	setof(E,
- 		(
- 			is_event(E),
- 			not(is_action(E))
- 		),Events),
- 	data_vis:timeline(Events),
- 	%%
+    setof(E,
+        (
+             is_event(E),
+             not(is_action(E))
+        ),Events),
+    data_vis:timeline(Events),
+     %%
     member(NextEvent,Events),
     create_marker(NextEvent).
 
 create_marker(Event) :-
-	interval(Event,[T1,_]),
-	show_markers(T1).
+    interval(Event,[T1,_]),
+    show_markers(T1).
