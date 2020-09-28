@@ -25,11 +25,18 @@ openease_query(Query, Mode) :-
     gen_msgs(Query).
 
 gen_msgs(is_event(_)) :-
+	get_time(Start),
     setof(E,
         (
-             is_event(E),
-             not(is_action(E))
+            ask(aggregate([
+				triple(E,rdf:type,dul:'Event'),
+				triple(E,rdf:type,regex('^.*(?!Action).*'))
+			]))
         ),Events),
+    get_time(End),
+    Duration is End - Start,
+    writeln(Duration),
+    writeln(Events),
     data_vis:timeline(Events),
      %%
     member(NextEvent,Events),
