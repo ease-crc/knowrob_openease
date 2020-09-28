@@ -24,24 +24,20 @@ openease_query(Query, Mode) :-
     call(Query),
     gen_msgs(Query).
 
-gen_msgs(is_event(_)) :-
-	get_time(Start),
-    setof(E,
-        (
-            ask(aggregate([
+get_event_data(E,Task,Start,End) :-
+	ask(aggregate([
 				triple(E,rdf:type,dul:'Event'),
-				triple(E,rdf:type,regex('^.*(?!Action).*'))
-			]))
-        ),Events),
-    get_time(End),
-    Duration is End - Start,
-    writeln(Duration),
-    writeln(Events),
-    data_vis:timeline(Events),
-     %%
-    member(NextEvent,Events),
-    create_marker(NextEvent).
+				triple(E,rdf:type,regex('^.*(?!Action).*')),
+				triple(E,dul:isClassifiedBy,Task),
+				triple(E,dul:hasTimeInterval,Interval),
+				triple(Interval,soma:hasIntervalBegin,Start),
+				triple(Interval,soma:hasIntervalEnd,End)
+			])).
 
-create_marker(Event) :-
-    time_interval_data(Event,T1,_),
-    show_markers(T1).
+gen_msgs(is_event(_)) :-
+    findall([E,Task,Start,End],(get_event_data(E,Task,Start,End)),EventData),
+    data_vis:timeline(EventData),
+     %%
+    findall(T0,member([_,_,T0,_],EventData),T0s),
+    member(Time,T0s),
+    marker_plugin:show_markers(Time).
