@@ -5,7 +5,10 @@ project(knowrob_openease)
 # Catkin
 ##############################################################################
 
-find_package(catkin REQUIRED knowrob)
+find_package(catkin REQUIRED message_generation knowrob)
+
+add_message_files(FILES Highlight.msg)
+generate_messages(DEPENDENCIES std_msgs)
 
 catkin_package(
   DEPENDS knowrob
