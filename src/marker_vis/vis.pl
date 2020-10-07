@@ -5,6 +5,10 @@
 
 use_module(library('ros/urdf')).
 
+clear_canvas :-
+	% TODO: implement me, should remove all marker
+	true.
+
 show(_) :-
 	tripledb_load('package://knowrob/owl/robots/PR2.owl'),
 	(	url_resolve('package://knowrob/urdf/pr2_for_unit_tests.urdf',Resolved)
