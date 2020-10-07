@@ -10,7 +10,9 @@
   <buildtool_depend>catkin</buildtool_depend>
 
   <build_depend>knowrob</build_depend>
+  <build_depend>message_generation</build_depend>
 
   <exec_depend>knowrob</exec_depend>
+  <exec_depend>message_generation</exec_depend>
 
 </package>
