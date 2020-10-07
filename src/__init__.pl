@@ -7,3 +7,6 @@
 
 % load marker visualization
 :- use_directory('marker_vis').
+% load IDE interface
+:- use_directory('ide').
+
