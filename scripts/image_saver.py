@@ -22,13 +22,15 @@ bridge = CvBridge()
 
 def image_callback(msg):
 	print("Received an image!")
-	# get the frame number (it is stored in the header)
-	frame = str(msg.header.seq)
+	# make sure dir in user volume exists
+	imgdir = '/home/ros/user_data/snapshots/'
+	if not os.path.exists(imgdir):
+		os.makedirs(imgdir)
 	# write file into user_data volume
-	filepath = '/home/ros/user_data/video/'+frame+'.jpg'
+	filepath = imgdir+str(msg.header.seq)+'.jpg'
 	try:
 		# Convert your ROS Image message to OpenCV2
-		cv2_img = bridge.imgmsg_to_cv2(msg, "bgr8")
+		cv2_img = bridge.imgmsg_to_cv2(msg)
 		# Save your OpenCV2 image as a jpeg 
 		cv2.imwrite(filepath, cv2_img)
 	except e:
