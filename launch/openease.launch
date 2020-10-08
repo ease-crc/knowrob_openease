@@ -6,6 +6,9 @@
   
   <param name="num_pl_threads" type="int" value="$(arg num_pl_threads)" />
   <param name="num_ros_threads" type="int" value="$(arg num_ros_threads)" />
+  
+  <node pkg="knowrob_openease" name="image_saver" type="image_saver.py" output="screen">
+  </node>
 
   <include file="$(find rosprolog)/launch/rosprolog.launch">
     <arg name="initial_package" type="string" value="knowrob_openease" />
