@@ -28,10 +28,10 @@ def image_callback(msg):
 	if not os.path.exists(imgdir):
 		os.makedirs(imgdir)
 	# write file into user_data volume
-	filepath = imgdir+str(msg.header.seq)+'.jpg'
+	filepath = imgdir+str(msg.header.seq)+'.jpeg'
 	try:
 		# Convert your ROS Image message to OpenCV2
-		cv2_img = bridge.imgmsg_to_cv2(msg)
+		cv2_img = bridge.imgmsg_to_cv2(msg, "bgr8")
 		# Save your OpenCV2 image as a jpeg 
 		cv2.imwrite(filepath, cv2_img)
 	except e:
