@@ -28,7 +28,8 @@ get_event_data(E,Task,Start,End) :-
 	ask(aggregate([
 				triple(E,rdf:type,dul:'Event'),
 				triple(E,rdf:type,regex('^.*(?!Action).*')),
-				triple(E,dul:isClassifiedBy,Task),
+				triple(E,dul:isClassifiedBy,TaskInstance),
+				triple(TaskInstance,rdf:type,Task),
 				triple(E,dul:hasTimeInterval,Interval),
 				triple(Interval,soma:hasIntervalBegin,Start),
 				triple(Interval,soma:hasIntervalEnd,End)
