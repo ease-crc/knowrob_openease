@@ -29,11 +29,11 @@ get_event_data(E,Task,Start,End) :-
 				triple(E,rdf:type,dul:'Event'),
 				triple(E,rdf:type,regex('^.*(?!Action).*')),
 				triple(E,dul:isClassifiedBy,TaskInstance),
-				triple(TaskInstance,rdf:type,Task),
 				triple(E,dul:hasTimeInterval,Interval),
 				triple(Interval,soma:hasIntervalBegin,Start),
 				triple(Interval,soma:hasIntervalEnd,End)
-			])).
+			])),
+	atomic_list_concat([Task,_],'_',TaskInstance).
 
 gen_msgs(is_event(_)) :-
     findall([E,Task,Start,End],(get_event_data(E,Task,Start,End)),EventData),
