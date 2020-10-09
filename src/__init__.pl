@@ -4,6 +4,7 @@
 
 % load query tunnling
 :- use_module('./query_handler.pl').
+:- use_module('./query_history.pl').
 
 % load marker visualization
 :- use_directory('marker_vis').
