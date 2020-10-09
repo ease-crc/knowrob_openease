@@ -18,7 +18,8 @@ history_add(Query) :-
 %
 history_get(Index,Query) :-
 	history_read(Queries),
-	Index1 is Index+1,
+	length(Queries,Count),
+	Index1 is Count-Index,
 	nth1(Index1,Queries,Query).
 
 %%
