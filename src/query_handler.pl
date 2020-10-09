@@ -35,10 +35,11 @@ get_event_data(E,Task,Start,End) :-
 			])),
 	atomic_list_concat([Task,_],'_',TaskInstance).
 
-gen_msgs((is_event(X))) :-
+gen_msgs(is_event(_)) :-
     findall([E,Task,Start,End],(get_event_data(E,Task,Start,End)),EventData),
     data_vis:timeline_data(EventData),
     %%
-    once(member([X,_,Time,_],EventData)),
+    findall(T0,member([_,_,T0,_],EventData),T0s),
+    member(Time,T0s),
     marker_plugin:show_markers(Time).
 
