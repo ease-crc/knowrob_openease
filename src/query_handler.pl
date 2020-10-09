@@ -35,7 +35,7 @@ get_event_data(E,Task,Start,End) :-
 			])),
 	atomic_list_concat([Task,_],'_',TaskInstance).
 
-gen_msgs(is_event(X)) :-
+gen_msgs((is_event(X))) :-
     findall([E,Task,Start,End],(get_event_data(E,Task,Start,End)),EventData),
     data_vis:timeline_data(EventData),
     %%
