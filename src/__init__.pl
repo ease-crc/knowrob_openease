@@ -11,3 +11,7 @@
 % load IDE interface
 :- use_directory('ide').
 
+% load backends for query visualization
+:- use_module('./backends/canvas.pl').
+:- use_module('./backends/timeline.pl').
+
