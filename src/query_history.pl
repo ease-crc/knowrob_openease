@@ -11,7 +11,7 @@ history_file('/home/ros/user_data/history.txt').
 history_add(Query) :-
 	history_file(Path),
 	open(Path,append,Stream),
-	write(Stream,Query), nl(Stream),
+	write(Stream,Query), nl(Stream), nl(Stream),
 	close(Stream).
 
 %%
@@ -28,18 +28,17 @@ history_read(Queries) :-
 	history_file(Path),
 	exists_file(Path),
 	open(Path,read,Stream),
-	read_lines(Stream,Queries),
+	read_queries(Stream,Queries),
 	close(Stream).
 
 %%
 %
 history_write(Queries) :-
-	writeln(Queries),
 	history_file(Path),
 	open(Path,write,Stream),
 	forall(
 		member(Q,Queries),
-		( write(Stream,Q), nl(Stream) )
+		( write(Stream,Q), nl(Stream), nl(Stream) )
 	),
 	close(Stream).
 
@@ -49,11 +48,22 @@ trim(L,N,S) :-
   append(P,S,L).
 
 %%
-read_lines(S,[X|Xs]) :-
-	read_line(S,X),!,
-	read_lines(S,Xs).
-read_lines(_,[]).
-		
+read_queries(S,[Q1|Qs]) :-
+	read_line(S,L1),!,
+	read_query(S,Ls),
+	atomic_list_concat([L1|Ls], '\n',Q1),
+	read_queries(S,Qs).
+read_queries(_,[]).
+
+%%
+read_query(S,Lines) :-
+	read_line(S,Line),
+	(	Line=''
+	->	Lines=[]
+	;	(	read_query(S,Lines0),
+			Lines=[Line|Lines0]
+		)
+	).
 
 %%
 read_line(S, X) :- 
