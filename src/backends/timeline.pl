@@ -2,9 +2,11 @@
 
 :- use_module(library(query_handler)).
 
-query_handler:openease_gen_answer(is_event(_Evt)) :-
+query_handler:openease_gen_answer(event,[Ev0,Ev1|Evs]) :-
     findall([E,Task,Start,End],
-    	timeline_data(E,Task,Start,End),
+    	(	member(E,[Ev0,Ev1|Evs]),
+	    	timeline_data(E,Task,Start,End)
+	    ),
     	EventData),
     data_vis:timeline_data(EventData).
 

@@ -14,4 +14,5 @@
 % load backends for query visualization
 :- use_module('./backends/canvas.pl').
 :- use_module('./backends/timeline.pl').
-
+:- use_module('./backends/tree.pl').
+:- use_module('./backends/graph.pl').
