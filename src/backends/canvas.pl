@@ -8,27 +8,21 @@ query_handler:openease_gen_answer(event,[Evt]) :-
 		triple(Interval,soma:hasIntervalBegin,Time0),
 		triple(Interval,soma:hasIntervalEnd,Time1)
 	]))),
-	writeln(set_goal(Time0,Time1)),
-	tf_plugin:tf_republish_set_goal(Time0,Time1),
-	
-	get_time(Time),
-    marker_plugin:show_markers(Time).
-	%data_vis_tf(Time0, Time1,
-	%	[title: 'Scene']).
+	tf_plugin:tf_republish_set_goal(Time0,Time1).
 
-data_vis_tf(StartTime, EndTime, Options) :-
-	% gather data
-	findall([[Frame,Time],[RefFrame,X,Y,Z,QX,QY,QZ,QW]],
-		tf_plugin:tf_mng_range(StartTime,EndTime,
-			Frame,
-			[RefFrame,[X,Y,Z],[QX,QY,QZ,QW]],Time,_),
-		ArrayData),
-	% generate ID for the chart
-	atomic_list_concat(
-		['tf',StartTime,EndTime],'_',ID),
-	% publish the message
-    data_vis(tf(ID),
-    	[array_data: ArrayData | Options]).
+%data_vis_tf(StartTime, EndTime, Options) :-
+%	% gather data
+%	findall([[Frame,Time],[RefFrame,X,Y,Z,QX,QY,QZ,QW]],
+%		tf_plugin:tf_mng_range(StartTime,EndTime,
+%			Frame,
+%			[RefFrame,[X,Y,Z],[QX,QY,QZ,QW]],Time,_),
+%		ArrayData),
+%	% generate ID for the chart
+%	atomic_list_concat(
+%		['tf',StartTime,EndTime],'_',ID),
+%	% publish the message
+%    data_vis(tf(ID),
+%    	[array_data: ArrayData | Options]).
 
 %query_handler:openease_gen_answer(event,Evts) :-
 %	% TODO: handle multiple events

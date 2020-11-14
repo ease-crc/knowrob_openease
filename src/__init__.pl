@@ -2,9 +2,12 @@
 :- register_ros_package(knowrob_openease).
 :- register_ros_package(knowrob).
 
-% load query tunnling
+% query answering
 :- use_module('./query_handler.pl').
 :- use_module('./query_history.pl').
+
+% handling of NEEMs
+:- use_module('./neems.pl').
 
 % load marker visualization
 :- use_directory('marker_vis').
