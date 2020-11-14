@@ -25,7 +25,7 @@ query_handler:openease_gen_answer(object,[Obj]) :-
 data_vis_rdf_tree(Root,Property,Options) :-
 	rdf_tree_data_(Root,Property,[Node,Children]),
 	Children \= [],
-	% generate ID for thwe chart
+	% generate ID for the chart
 	Node = [RootName|_],
 	rdf_db:rdf_split_url(_,PropertyName,Property),
 	atomic_list_concat(

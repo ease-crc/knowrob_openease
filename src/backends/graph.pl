@@ -4,7 +4,6 @@
 	]).
 
 :- use_module(library(query_handler)).
-:- use_module(library(tree_handler)).
 
 %%
 query_handler:openease_gen_answer(event,[Evt]) :-
