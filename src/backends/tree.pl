@@ -6,10 +6,10 @@
 :- use_module(library(query_handler)).
 
 %%
-query_handler:openease_gen_answer(event,[Evt]) :-
-	data_vis_rdf_tree(Evt,
-		dul:hasConstituent,
-		[title: 'Phases']).
+%query_handler:openease_gen_answer(event,[Evt]) :-
+%	data_vis_rdf_tree(Evt,
+%		dul:hasConstituent,
+%		[title: 'Phases']).
 
 query_handler:openease_gen_answer(event,[Evt]) :-
 	data_vis_rdf_tree(Evt,

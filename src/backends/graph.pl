@@ -6,10 +6,10 @@
 :- use_module(library(query_handler)).
 
 %%
-query_handler:openease_gen_answer(event,[Evt]) :-
-	data_vis_rdf_graph(Evt,
-		dul:hasConstituent,
-		[title: 'Phases (graph)']).
+%query_handler:openease_gen_answer(event,[Evt]) :-
+%	data_vis_rdf_graph(Evt,
+%		dul:hasConstituent,
+%		[title: 'Phases (graph)']).
 
 %%
 data_vis_rdf_graph(Root,Property,Options) :-

@@ -10,6 +10,23 @@ query_handler:openease_gen_answer(event,[Ev0,Ev1|Evs]) :-
     	EventData),
     data_vis:timeline_data(EventData).
 
+query_handler:openease_gen_answer(event,[Evt]) :-
+	setof([SubEvt,Task,Start,End],
+		(	get_subevent(Evt,SubEvt),
+			timeline_data(SubEvt,Task,Start,End)
+		),
+		EventData),
+	EventData=[_,_|_],
+	data_vis:timeline_data(EventData,
+		[ title: 'Activity phases'
+		]).
+
+%%
+get_subevent(Evt,Evt).
+get_subevent(Evt,SubEvent) :-
+	triple(Evt,dul:hasConstituent,X),
+	get_subevent(X,SubEvent).
+
 %%
 timeline_data(E,Task,Start,End) :-
 	ask(aggregate([
