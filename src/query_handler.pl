@@ -1,4 +1,4 @@
-:- module(query_handler,
+ :- module(query_handler,
     [ 
     	openease_query(t,r)
     ]).
@@ -40,7 +40,14 @@ openease_query(_Query,Bindings) :-
 			is_object(ObjAtom)
 		),
 		Objects),
-	openease_query_(object,Objects).
+	openease_query_(object,Objects),
+	% collect all object in Bindings
+	findall(ValAtom,
+		(	member(Val,Bindings),
+			atom_string(ValAtom,Val)
+		),
+		Values),
+	openease_query_(all,Values).
 
 %%
 openease_query_(_,[]) :- !.

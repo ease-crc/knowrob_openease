@@ -19,3 +19,4 @@
 :- use_module('./backends/timeline.pl').
 :- use_module('./backends/tree.pl').
 :- use_module('./backends/graph.pl').
+:- use_module('./backends/table.pl').
